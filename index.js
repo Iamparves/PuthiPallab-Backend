@@ -3,7 +3,6 @@ import cors from "cors";
 import "dotenv/config.js";
 import express from "express";
 import mongoSanitize from "express-mongo-sanitize";
-import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import hpp from "hpp";
 import morgan from "morgan";
@@ -39,14 +38,6 @@ app.use(helmet());
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
-
-// Limit requests from same IP
-const limiter = rateLimit({
-  max: 100,
-  windowMs: 60 * 60 * 1000,
-  message: "Too many requests from this IP, please try again in an hour!",
-});
-app.use("/api", limiter);
 
 // Body parser, cors, cookie parser
 app.use(express.json());
