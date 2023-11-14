@@ -1,0 +1,122 @@
+[
+  {
+    "coverImg": "https://example.com/book1-cover.jpg",
+    "title": "The Secret Garden",
+    "author": "Frances Hodgson Burnett",
+    "publisher": "Penguin Classics",
+    "genres": ["655360b6f9b47a07365a4042", "655360bef9b47a07365a4045"],
+    "publicationDate": "1911-08-16",
+    "language": "English",
+    "pageCount": 298,
+    "summary": "The story of Mary Lennox, a lonely and spoiled girl who discovers the magic of nature and friendship in a hidden garden.",
+    "totalCopies": 3
+  },
+  {
+    "coverImg": "https://example.com/book2-cover.jpg",
+    "title": "1984",
+    "author": "George Orwell",
+    "publisher": "Signet Classics",
+    "genres": ["655360b6f9b47a07365a4042", "655360c5f9b47a07365a4048"],
+    "publicationDate": "1949-06-08",
+    "language": "English",
+    "pageCount": 328,
+    "summary": "A dystopian novel depicting a totalitarian society under the control of a menacing government led by Big Brother.",
+    "totalCopies": 5
+  },
+  {
+    "coverImg": "https://example.com/book3-cover.jpg",
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "publisher": "J.B. Lippincott & Co.",
+    "genres": ["655360b6f9b47a07365a4042", "655360bef9b47a07365a4045"],
+    "publicationDate": "1960-07-11",
+    "language": "English",
+    "pageCount": 281,
+    "summary": "A classic novel that explores themes of racial injustice and moral growth in the American South.",
+    "totalCopies": 1
+  },
+  {
+    "coverImg": "https://example.com/book4-cover.jpg",
+    "title": "The Hitchhiker's Guide to the Galaxy",
+    "author": "Douglas Adams",
+    "publisher": "Pan Books",
+    "genres": ["655360ccf9b47a07365a404b", "655360d3f9b47a07365a404e"],
+    "publicationDate": "1979-10-12",
+    "language": "English",
+    "pageCount": 224,
+    "summary": "A comedic science fiction series that follows the misadventures of an unwitting human and his alien friend.",
+    "totalCopies": 1
+  },
+  {
+    "coverImg": "https://example.com/book5-cover.jpg",
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "publisher": "Penguin Classics",
+    "genres": ["655360b6f9b47a07365a4042", "655360d8f9b47a07365a4051"],
+    "publicationDate": "1813-01-28",
+    "language": "English",
+    "pageCount": 432,
+    "summary": "A classic romance novel that explores the themes of love, class, and societal expectations.",
+    "totalCopies": 1
+  },
+  {
+    "coverImg": "https://example.com/book6-cover.jpg",
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "publisher": "Scribner",
+    "genres": ["655360b6f9b47a07365a4042", "655360bef9b47a07365a4045"],
+    "publicationDate": "1925-04-10",
+    "language": "English",
+    "pageCount": 180,
+    "summary": "A novel set in the Roaring Twenties, exploring the American Dream and its corruption.",
+    "totalCopies": 2
+  },
+  {
+    "coverImg": "https://example.com/book7-cover.jpg",
+    "title": "The Hobbit",
+    "author": "J.R.R. Tolkien",
+    "publisher": "George Allen & Unwin",
+    "genres": ["655360ddf9b47a07365a4054"],
+    "publicationDate": "1937-09-21",
+    "language": "English",
+    "pageCount": 310,
+    "summary": "An adventure novel set in Middle-earth, following the journey of Bilbo Baggins.",
+    "totalCopies": 3
+  },
+  {
+    "coverImg": "https://example.com/book8-cover.jpg",
+    "title": "The Catcher in the Rye",
+    "author": "J.D. Salinger",
+    "publisher": "Little, Brown and Company",
+    "genres": ["655360b6f9b47a07365a4042", "655360e3f9b47a07365a4057"],
+    "publicationDate": "1951-07-16",
+    "language": "English",
+    "pageCount": 224,
+    "summary": "A novel narrated by a teenage boy, Holden Caulfield, as he navigates the challenges of adolescence.",
+    "totalCopies": 2
+  },
+  {
+    "coverImg": "https://example.com/book9-cover.jpg",
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "publisher": "HarperOne",
+    "genres": ["655360b6f9b47a07365a4042", "6553628ff543fa60876d705b"],
+    "publicationDate": "1988-01-01",
+    "language": "Portuguese",
+    "pageCount": 197,
+    "summary": "A philosophical novel that follows Santiago, a shepherd, on a journey to discover his personal legend.",
+    "totalCopies": 5
+  },
+  {
+    "coverImg": "https://example.com/book10-cover.jpg",
+    "title": "The Lord of the Rings",
+    "author": "J.R.R. Tolkien",
+    "publisher": "George Allen & Unwin",
+    "genres": ["655360ddf9b47a07365a4054"],
+    "publicationDate": "1954-07-29",
+    "language": "English",
+    "pageCount": 1178,
+    "summary": "An epic fantasy trilogy that follows the quest to destroy the One Ring and defeat the Dark Lord Sauron.",
+    "totalCopies": 4
+  }
+]
