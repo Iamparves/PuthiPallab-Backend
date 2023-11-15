@@ -128,7 +128,7 @@ export const deleteReview = catchAsync(async (req, res, next) => {
   // 3) Delete review
   await Review.findByIdAndDelete(id);
 
-  res.status(204).json({
+  res.status(200).json({
     status: "success",
     message: "Review deleted successfully",
   });

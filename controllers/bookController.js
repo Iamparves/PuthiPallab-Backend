@@ -170,7 +170,7 @@ export const deleteBook = catchAsync(async (req, res, next) => {
   await Waitlist.deleteOne({ book: req.params.id });
   await Issue.deleteMany({ book: req.params.id });
 
-  res.status(204).json({
+  res.status(200).json({
     status: "success",
     data: null,
   });

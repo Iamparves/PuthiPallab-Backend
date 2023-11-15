@@ -10,7 +10,12 @@ import {
   updatePassword,
   verifyEmail,
 } from "../controllers/authController.js";
-import { getAllUsers, getMe, updateMe } from "../controllers/userController.js";
+import {
+  getAllUsers,
+  getMe,
+  updateMe,
+  updateUserRole,
+} from "../controllers/userController.js";
 
 const router = Router();
 
@@ -27,6 +32,8 @@ router.post("/resetPassword/:token", resetPassword);
 
 router.patch("/updateMyPassword", protect, updatePassword);
 router.patch("/updateMe", protect, updateMe);
+
+router.patch("/roles/:id", protect, restrictTo("librarian"), updateUserRole);
 
 router.route("/").get(protect, restrictTo("librarian"), getAllUsers);
 

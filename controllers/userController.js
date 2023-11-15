@@ -1,5 +1,6 @@
 import User from "../models/userModel.js";
 import APIFeatures from "../utils/apiFeatures.js";
+import AppError from "../utils/appError.js";
 import catchAsync from "../utils/catchAsync.js";
 import filterObj from "../utils/filterObj.js";
 
@@ -69,6 +70,32 @@ export const updateMe = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: "success",
+    data: {
+      user: updatedUser,
+    },
+  });
+});
+
+export const updateUserRole = catchAsync(async (req, res, next) => {
+  const role = req.body.role;
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(new AppError("No user found with that ID", 404));
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(
+    req.params.id,
+    { role },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+
+  res.status(200).json({
+    status: "success",
+    message: "User role updated successfully",
     data: {
       user: updatedUser,
     },
