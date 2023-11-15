@@ -34,7 +34,6 @@ const userSchema = new mongoose.Schema(
     },
     birthDate: {
       type: Date,
-      required: [true, "Birth date is required"],
     },
     role: {
       type: String,

@@ -72,8 +72,7 @@ export const sendVerificationEmail = async (user, res, next) => {
 };
 
 export const signup = catchAsync(async (req, res, next) => {
-  const { name, email, gender, birthDate, password, passwordConfirm } =
-    req.body;
+  const { name, email, gender, password, passwordConfirm } = req.body;
 
   const sequence = await Counter.findOne({});
 
@@ -81,7 +80,6 @@ export const signup = catchAsync(async (req, res, next) => {
     name,
     email,
     gender,
-    birthDate,
     password,
     passwordConfirm,
     userId: sequence.userSequence,
