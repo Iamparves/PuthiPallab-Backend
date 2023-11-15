@@ -76,12 +76,12 @@ export const issueBook = catchAsync(async (req, res, next) => {
 });
 
 export const returnBook = catchAsync(async (req, res, next) => {
-  const { user, book, returnDate } = req.body;
+  const { user, book, returnDate, delayedFine } = req.body;
 
   // 1) Check if issues exists and update it
   const issue = await Issue.findOneAndUpdate(
     { user, book, status: "issued" },
-    { returnDate, status: "returned" },
+    { returnDate, delayedFine, status: "returned" },
     { new: true }
   );
 

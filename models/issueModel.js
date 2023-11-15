@@ -38,18 +38,6 @@ const issueSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-
-issueSchema.pre(/^find/, function (next) {
-  // fine tune it
-  const isDelayed = this.estimatedReturnDate < Date.now();
-
-  if (isDelayed) {
-    this.delayedFine = 50;
-  }
-
-  next();
-});
-
 const Issue = mongoose.model("Issue", issueSchema);
 
 export default Issue;
