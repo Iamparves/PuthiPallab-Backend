@@ -8,6 +8,8 @@ import {
 
 const router = Router();
 
+router.get("/myissues", protect, restrictTo("member"), getAllIssues);
+
 router.use(protect, restrictTo("librarian"));
 
 router.route("/").get(getAllIssues).post(issueBook).patch(returnBook);

@@ -23,14 +23,7 @@ export const getAllUsers = catchAsync(async (req, res, next) => {
 });
 
 export const getMe = catchAsync(async (req, res, next) => {
-  const user = await User.findById(req.user._id).populate({
-    path: "borrowedBooks",
-    select: "_id book issueDate returnDate status",
-    populate: {
-      path: "book",
-      select: "_id title coverImg",
-    },
-  });
+  const user = await User.findById(req.user._id);
 
   res.status(200).json({
     status: "success",
