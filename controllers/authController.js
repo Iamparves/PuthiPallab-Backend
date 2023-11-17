@@ -120,6 +120,15 @@ export const login = catchAsync(async (req, res, next) => {
   return createSendToken(user, 200, res);
 });
 
+export const logout = catchAsync(async (req, res, next) => {
+  res.clearCookie("jwt");
+
+  res.status(200).json({
+    status: "success",
+    message: "Logged out successfully",
+  });
+});
+
 export const verifyEmail = catchAsync(async (req, res, next) => {
   // 1) Get user based on token
   const { token } = req.params;

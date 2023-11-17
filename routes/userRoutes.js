@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   forgotPassword,
   login,
+  logout,
   protect,
   resendVerificationEmail,
   resetPassword,
@@ -23,6 +24,7 @@ router.get("/me", protect, getMe);
 
 router.post("/signup", signup);
 router.post("/login", login);
+router.get("/logout", logout);
 
 router.post("/verifyEmail/:token", verifyEmail);
 router.post("/resendVerificationEmail", resendVerificationEmail);
