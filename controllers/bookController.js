@@ -84,7 +84,7 @@ export const addBook = catchAsync(async (req, res, next) => {
     "publisher",
     "genres",
     "publicationDate",
-    "language",
+    "bookLanguage",
     "pageCount",
     "summary",
     "totalCopies"
@@ -121,7 +121,7 @@ export const updateBook = catchAsync(async (req, res, next) => {
     "publisher",
     "genres",
     "publicationDate",
-    "language",
+    "bookLanguage",
     "pageCount",
     "summary",
     "totalCopies"

@@ -9,7 +9,18 @@ import {
 } from "./waitlistController.js";
 
 export const getAllIssues = catchAsync(async (req, res, next) => {
-  const features = new APIFeatures(Issue.find(), req.query)
+  const features = new APIFeatures(
+    Issue.find()
+      .populate({
+        path: "user",
+        select: "_id name userId",
+      })
+      .populate({
+        path: "book",
+        select: "_id title coverImg bookId",
+      }),
+    req.query
+  )
     .filter()
     .sort()
     .limitFields()
@@ -55,6 +66,8 @@ export const issueBook = catchAsync(async (req, res, next) => {
 
   // 2) Check if book is available
   const bookData = await Book.findById(book);
+
+  console.log(req.body);
 
   if (!bookData || bookData.availableCopies === 0) {
     return next(new AppError("This book is not available", 400));

@@ -5,7 +5,6 @@ import express from "express";
 import mongoSanitize from "express-mongo-sanitize";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
-import hpp from "hpp";
 import morgan from "morgan";
 import xss from "xss-clean";
 
@@ -42,7 +41,7 @@ if (process.env.NODE_ENV === "development") {
 
 // Limit requests from same IP
 const limiter = rateLimit({
-  max: 180,
+  max: 300,
   windowMs: 60 * 60 * 1000,
   message: "Too many requests from this IP, please try again in an hour!",
 });
@@ -64,13 +63,6 @@ app.use(mongoSanitize());
 
 // Data sanitization against XSS
 app.use(xss());
-
-// Prevent parameter pollution
-app.use(
-  hpp({
-    whitelist: ["language", "categories"],
-  })
-);
 
 // API Routes
 app.use("/api/v1/users", userRouter);

@@ -99,7 +99,10 @@ const userSchema = new mongoose.Schema(
     //     },
     //   },
     // ],
-    verifyToken: String,
+    verifyToken: {
+      type: String,
+      select: false,
+    },
     passwordResetToken: String,
     passwordResetExpires: Date,
     passwordChangedAt: Date,

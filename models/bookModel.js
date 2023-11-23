@@ -32,7 +32,7 @@ const bookSchema = new mongoose.Schema(
     publicationDate: {
       type: Date,
     },
-    language: {
+    bookLanguage: {
       type: String,
       required: true,
     },
