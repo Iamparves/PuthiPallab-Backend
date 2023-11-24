@@ -1,5 +1,6 @@
 import Book from "../models/bookModel.js";
 import Issue from "../models/issueModel.js";
+import User from "../models/userModel.js";
 import APIFeatures from "../utils/apiFeatures.js";
 import AppError from "../utils/appError.js";
 import catchAsync from "../utils/catchAsync.js";
@@ -37,6 +38,44 @@ export const getAllIssues = catchAsync(async (req, res, next) => {
   });
 });
 
+export const getIssue = catchAsync(async (req, res, next) => {
+  const { bookId, userId } = req.params;
+
+  // Check if book exists
+  const book = await Book.findOne({ bookId });
+
+  if (!book) {
+    return next(new AppError("No book found with that ID", 404));
+  }
+
+  // Check if user exists
+  const user = await User.findOne({ userId });
+
+  if (!user) {
+    return next(new AppError("No user found with that ID", 404));
+  }
+
+  // Check if issue exists
+  const issue = await Issue.findOne({
+    book: book._id,
+    user: user._id,
+    status: "issued",
+  });
+
+  if (!issue) {
+    return next(
+      new AppError("This book is not currently issued to this user", 404)
+    );
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      issue,
+    },
+  });
+});
+
 export const getMyIssues = catchAsync(async (req, res, next) => {
   const issues = await Issue.find({ user: req.user._id })
     .select("_id book issueDate returnDate status")
@@ -66,8 +105,6 @@ export const issueBook = catchAsync(async (req, res, next) => {
 
   // 2) Check if book is available
   const bookData = await Book.findById(book);
-
-  console.log(req.body);
 
   if (!bookData || bookData.availableCopies === 0) {
     return next(new AppError("This book is not available", 400));
