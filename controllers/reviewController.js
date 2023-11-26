@@ -119,7 +119,10 @@ export const deleteReview = catchAsync(async (req, res, next) => {
   }
 
   // 2) Check if user is authorized to delete review
-  if (review.member.toString() !== req.user._id.toString()) {
+  if (
+    review.member.toString() !== req.user._id.toString() &&
+    req.user.role !== "librarian"
+  ) {
     return next(
       new AppError("You are not authorized to delete this review", 401)
     );
