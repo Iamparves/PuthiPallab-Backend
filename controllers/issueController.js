@@ -42,14 +42,16 @@ export const getIssue = catchAsync(async (req, res, next) => {
   const { bookId, userId } = req.params;
 
   // Check if book exists
-  const book = await Book.findOne({ bookId });
+  const book = await Book.findOne({ bookId }).select(
+    "_id title coverImg bookId"
+  );
 
   if (!book) {
     return next(new AppError("No book found with that ID", 404));
   }
 
   // Check if user exists
-  const user = await User.findOne({ userId });
+  const user = await User.findOne({ userId }).select("_id name userId");
 
   if (!user) {
     return next(new AppError("No user found with that ID", 404));
@@ -71,7 +73,13 @@ export const getIssue = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     data: {
-      issue,
+      issue: {
+        _id: issue._id,
+        book,
+        user,
+        issueDate: issue.issueDate,
+        estimatedReturnDate: issue.estimatedReturnDate,
+      },
     },
   });
 });
