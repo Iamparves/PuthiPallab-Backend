@@ -12,6 +12,7 @@ import globalErrorHander from "./controllers/errorController.js";
 import bookRouter from "./routes/bookRoutes.js";
 import genreRouter from "./routes/genreRoutes.js";
 import issueRouter from "./routes/issueRoutes.js";
+import overviewRouter from "./routes/overviewRoutes.js";
 import reviewRouter from "./routes/reviewRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import waitlistRouter from "./routes/waitlistRoutes.js";
@@ -71,6 +72,7 @@ app.use("/api/v1/genres", genreRouter);
 app.use("/api/v1/reviews", reviewRouter);
 app.use("/api/v1/issues", issueRouter);
 app.use("/api/v1/waitlist", waitlistRouter);
+app.use("/api/v1/overview", overviewRouter);
 
 // Home route
 app.get("/", (req, res) => {

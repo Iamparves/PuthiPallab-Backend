@@ -81,24 +81,6 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    // borrowedBooks: [
-    //   {
-    //     type: ObjectId,
-    //     ref: "Book",
-    //     status: {
-    //       type: String,
-    //       enum: {
-    //         values: ["returned", "borrowed"],
-    //         message: "Status is either: returned or borrowed",
-    //       },
-    //       required: true,
-    //     },
-    //     issue: {
-    //       type: ObjectId,
-    //       ref: "Issue",
-    //     },
-    //   },
-    // ],
     verifyToken: {
       type: String,
       select: false,
