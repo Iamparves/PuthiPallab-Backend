@@ -14,7 +14,7 @@ const signToken = (id) => {
 };
 
 const cookieOptions = {
-  httpOnly: true,
+  // httpOnly: true,
   path: "/",
   secure: true,
   sameSite: "None",
@@ -185,9 +185,6 @@ export const resendVerificationEmail = catchAsync(async (req, res, next) => {
 export const protect = catchAsync(async (req, res, next) => {
   // 1) Getting token and check if it's there
   const token = req.cookies?.jwt;
-
-  console.log("TOKEN: " + token);
-  console.log("COOKIE: ", req.cookies);
 
   if (!token) {
     return next(
