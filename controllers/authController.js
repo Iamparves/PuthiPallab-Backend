@@ -14,9 +14,9 @@ const signToken = (id) => {
 };
 
 const cookieOptions = {
-  // httpOnly: true,
+  httpOnly: true,
   path: "/",
-  secure: true,
+  secure: process.env.NODE_ENV === "production",
   sameSite: "None",
   maxAge: process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000, // 90 days
 };

@@ -50,7 +50,10 @@ const limiter = rateLimit({
 app.use("/api", limiter);
 
 const corsOptions = {
-  origin: true,
+  origin:
+    process.env.NODE_ENV === "production"
+      ? "https://puthipallab.vercel.app"
+      : "http://localhost:5173",
   credentials: true,
   optionsSuccessStatus: 200,
 };
