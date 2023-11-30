@@ -20,7 +20,7 @@ const createSendToken = (user, statusCode, res) => {
     httpOnly: true,
     path: "/",
     secure: true,
-    sameSite: "none",
+    sameSite: "None",
     maxAge: process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000, // 90 days
   };
 

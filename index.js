@@ -56,9 +56,10 @@ const corsOptions = {
 };
 
 // Body parser, cors, cookie parser
-app.use(express.json());
 app.use(cors(corsOptions));
 app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
