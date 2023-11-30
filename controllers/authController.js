@@ -13,16 +13,16 @@ const signToken = (id) => {
   });
 };
 
+const cookieOptions = {
+  httpOnly: true,
+  // path: "/",
+  // secure: true,
+  // sameSite: "None",
+  maxAge: process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000, // 90 days
+};
+
 const createSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
-
-  const cookieOptions = {
-    httpOnly: true,
-    path: "/",
-    secure: true,
-    sameSite: "None",
-    maxAge: process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000, // 90 days
-  };
 
   // Remove password from output
   user.password = undefined;
@@ -121,7 +121,7 @@ export const login = catchAsync(async (req, res, next) => {
 });
 
 export const logout = catchAsync(async (req, res, next) => {
-  res.clearCookie("jwt");
+  res.clearCookie("jwt", cookieOptions);
 
   res.status(200).json({
     status: "success",
