@@ -45,10 +45,13 @@ const userSchema = new mongoose.Schema(
     },
     contactNumber: {
       type: String,
-      validate: [
-        validator.isMobilePhone,
-        "please provide a valid contact number",
-      ],
+      validate: {
+        validator: (value) => {
+          if (value.length === 0) return true;
+          return validator.isMobilePhone(value);
+        },
+        message: "Please provide a valid contact number",
+      },
     },
     photo: {
       type: String,
