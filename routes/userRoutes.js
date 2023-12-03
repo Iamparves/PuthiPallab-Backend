@@ -26,7 +26,7 @@ router.post("/signup", signup);
 router.post("/login", login);
 router.get("/logout", logout);
 
-router.post("/verifyEmail/:token", verifyEmail);
+router.patch("/verifyEmail/:token", verifyEmail);
 router.post("/resendVerificationEmail", resendVerificationEmail);
 
 router.post("/forgotPassword", forgotPassword);

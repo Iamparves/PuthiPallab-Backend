@@ -1,19 +1,26 @@
 import nodemailer from "nodemailer";
+import smtpTransport from "nodemailer-smtp-transport";
 
 const sendEmail = async (options) => {
   // 1) Create a transporter
-  const transporter = await nodemailer.createTransport({
-    host: process.env.MAIL_HOST,
-    port: process.env.MAIL_PORT,
-    auth: {
-      user: process.env.MAIL_USER,
-      pass: process.env.MAIL_PASS,
-    },
-  });
+  const transporter = nodemailer.createTransport(
+    smtpTransport({
+      host: process.env.MAIL_HOST,
+      port: process.env.MAIL_PORT,
+      secure: false,
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS,
+      },
+      tls: {
+        rejectUnauthorized: false,
+      },
+    })
+  );
 
   // 2) Define the email options
   const mailOptions = {
-    from: "Puthi Pallab Library <itzparves@gmail.com>",
+    from: "Puthi Pallab Library <parveshossaintt@gmail.com>",
     to: options.email,
     subject: options.subject,
     text: options.message,
@@ -24,7 +31,7 @@ const sendEmail = async (options) => {
     if (error) {
       console.log(error);
     } else {
-      console.log("Email sent successful!");
+      console.log("Email sent: " + info.response);
     }
   });
 };
