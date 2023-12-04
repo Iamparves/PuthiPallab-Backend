@@ -45,14 +45,14 @@ export const sendVerificationEmail = async (user, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   // Send it to user's email
-  const verifyURL = `${process.env.FRONTEND_URL}/verifyEmail/${verifyToken}`;
+  const verifyURL = `${process.env.FRONTEND_URL}/verify-email/${verifyToken}`;
 
   const message = `Welcome to Puthi Pallab! Please verify your email address by clicking the link below.\n${verifyURL}`;
 
   try {
     await sendEmail({
       email: user.email,
-      subject: "Your email verification token for Puthi Pallab",
+      subject: "Your email verification token (valid for 10 min)",
       message,
     });
 
@@ -139,7 +139,7 @@ export const verifyEmail = catchAsync(async (req, res, next) => {
   });
 
   if (!user) {
-    return next(new AppError("Token is invalid"));
+    return next(new AppError("Token is invalid or expired"));
   }
 
   // 2) If token is valid and user is found, set user to verified
