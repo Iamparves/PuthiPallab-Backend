@@ -6,7 +6,7 @@ import catchAsync from "../utils/catchAsync.js";
 
 export const getOverview = catchAsync(async (req, res, next) => {
   const totalBooks = await Book.countDocuments();
-  const totalUsers = await User.countDocuments();
+  const totalUsers = await User.countDocuments({ role: "member" });
   const totalReviews = await Review.countDocuments();
 
   const issuedBooks = await Book.aggregate([

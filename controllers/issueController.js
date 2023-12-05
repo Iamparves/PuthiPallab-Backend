@@ -85,20 +85,8 @@ export const getIssue = catchAsync(async (req, res, next) => {
 });
 
 export const getMyIssues = catchAsync(async (req, res, next) => {
-  const issues = await Issue.find({ user: req.user._id })
-    .select("_id book issueDate returnDate status")
-    .populate({
-      path: "book",
-      select: "_id title coverImg",
-    });
-
-  res.status(200).json({
-    status: "success",
-    results: issues.length,
-    data: {
-      issues,
-    },
-  });
+  req.query.user = req.user._id;
+  next();
 });
 
 export const issueBook = catchAsync(async (req, res, next) => {

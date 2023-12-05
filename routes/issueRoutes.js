@@ -3,13 +3,20 @@ import { protect, restrictTo } from "../controllers/authController.js";
 import {
   getAllIssues,
   getIssue,
+  getMyIssues,
   issueBook,
   returnBook,
 } from "../controllers/issueController.js";
 
 const router = Router();
 
-router.get("/myissues", protect, restrictTo("member"), getAllIssues);
+router.get(
+  "/myissues",
+  protect,
+  restrictTo("member"),
+  getMyIssues,
+  getAllIssues
+);
 
 router.use(protect, restrictTo("librarian"));
 
