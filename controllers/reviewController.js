@@ -62,7 +62,7 @@ export const getMyReviews = catchAsync(async (req, res, next) => {
     status: "success",
     results: myReviews.length,
     data: {
-      myReviews,
+      reviews: myReviews,
     },
   });
 });
