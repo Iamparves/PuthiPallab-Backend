@@ -30,7 +30,7 @@ export const getMyWaitlist = catchAsync(async (req, res, next) => {
     waitingList: userId,
   }).populate({
     path: "book",
-    select: "_id title author",
+    select: "_id coverImg title author",
   });
 
   res.status(200).json({

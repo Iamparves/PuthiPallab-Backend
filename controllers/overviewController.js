@@ -1,4 +1,5 @@
 import Book from "../models/bookModel.js";
+import Issue from "../models/issueModel.js";
 import Review from "../models/reviewModel.js";
 import User from "../models/userModel.js";
 import catchAsync from "../utils/catchAsync.js";
@@ -8,7 +9,7 @@ export const getOverview = catchAsync(async (req, res, next) => {
   const totalUsers = await User.countDocuments();
   const totalReviews = await Review.countDocuments();
 
-  const [{ total: issuedBooks }] = await Book.aggregate([
+  const issuedBooks = await Book.aggregate([
     {
       $project: {
         difference: { $subtract: ["$totalCopies", "$availableCopies"] },
@@ -22,11 +23,25 @@ export const getOverview = catchAsync(async (req, res, next) => {
     },
   ]);
 
-  const [{ total: totalIssuedBooks }] = await Book.aggregate([
+  const totalIssuedBooks = await Book.aggregate([
     {
       $group: {
         _id: null,
         total: { $sum: "$borrowCount" },
+      },
+    },
+  ]);
+
+  const totalFineCollected = await Issue.aggregate([
+    {
+      $match: {
+        status: "returned",
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        total: { $sum: "$delayedFine" },
       },
     },
   ]);
@@ -37,9 +52,59 @@ export const getOverview = catchAsync(async (req, res, next) => {
       totalBooks,
       totalUsers,
       totalReviews,
-      totalIssuedBooks,
-      issuedBooks,
-      returnedBooks: totalIssuedBooks - issuedBooks,
+      totalIssuedBooks: totalIssuedBooks[0]?.total || 0,
+      issuedBooks: issuedBooks[0]?.total || 0,
+      totalFineCollected: totalFineCollected[0]?.total || 0,
+    },
+  });
+});
+
+export const getMemberOverview = catchAsync(async (req, res, next) => {
+  const id = req.user._id;
+
+  const totalBorrowed = await Issue.countDocuments({ user: id });
+  const totalReviews = await Review.countDocuments({ member: id });
+
+  const currentlyBorrowed = await Issue.countDocuments({
+    user: id,
+    status: "issued",
+  });
+
+  const totalReturned = await Issue.countDocuments({
+    user: id,
+    status: "returned",
+  });
+
+  const delayedBooks = await Issue.countDocuments({
+    user: id,
+    status: "issued",
+    estimatedReturnDate: { $lt: new Date() },
+  });
+
+  const totalFinePaid = await Issue.aggregate([
+    {
+      $match: {
+        user: id,
+        status: "returned",
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        total: { $sum: "$delayedFine" },
+      },
+    },
+  ]);
+
+  return res.status(200).json({
+    status: "success",
+    data: {
+      totalBorrowed,
+      totalReviews,
+      currentlyBorrowed,
+      totalReturned,
+      delayedBooks,
+      totalFinePaid: totalFinePaid[0]?.total || 0,
     },
   });
 });
