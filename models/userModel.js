@@ -2,7 +2,6 @@ import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import mongoose from "mongoose";
 import validator from "validator";
-// const ObjectId = mongoose.Types.ObjectId;
 
 const userSchema = new mongoose.Schema(
   {
@@ -59,14 +58,6 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, "password is required"],
-      validate: {
-        validator: (value) =>
-          validator.isStrongPassword(value, {
-            minLength: 6,
-            minNumbers: 1,
-            minSymbols: 1,
-          }),
-      },
       select: false,
     },
     passwordConfirm: {
