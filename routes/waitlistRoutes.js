@@ -15,10 +15,10 @@ router
   .route("/")
   .get(protect, restrictTo("librarian"), getAllWaitlist)
   .post(protect, restrictTo("member"), addToWaitlist)
-  .delete(protect, restrictTo("member"), removeFromWaitlist);
+  .patch(protect, restrictTo("member"), removeFromWaitlist);
 
 router
   .route("/:id")
-  .delete(protect, restrictTo("librarian"), removeFromWaitlist);
+  .patch(protect, restrictTo("librarian"), removeFromWaitlist);
 
 export default router;

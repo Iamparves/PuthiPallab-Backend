@@ -87,27 +87,27 @@ export const addToWaitlist = catchAsync(async (req, res, next) => {
 });
 
 export const removeUserFromWaitlist = async (userId, bookId) => {
-  const waitingList = await Waitlist.updateOne(
-    {
-      book: bookId,
-    },
-    {
-      $pull: {
-        waitingList: userId,
-      },
-    }
+  const waitlist = await Waitlist.findOne({ book: bookId });
+
+  if (!waitlist) return false;
+
+  const filtered = waitlist.waitingList.filter(
+    (user) => user.toString() !== userId.toString()
   );
 
-  return waitingList;
+  waitlist.waitingList = filtered;
+  await waitlist.save();
+
+  return waitlist;
 };
 
 export const removeFromWaitlist = catchAsync(async (req, res, next) => {
   const user = req.params.id || req.user._id;
-  const book = req.body.book;
+  const { book } = req.body;
 
-  const waitingList = await removeUserFromWaitlist(user, book);
+  const waitlist = await removeUserFromWaitlist(user, book);
 
-  if (waitingList.nModified === 0) {
+  if (waitlist === false) {
     return next(
       new AppError("No waitlist found for this book or the user", 404)
     );
@@ -116,7 +116,7 @@ export const removeFromWaitlist = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     data: {
-      waitingList,
+      waitlist,
     },
   });
 });
