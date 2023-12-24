@@ -55,10 +55,6 @@ export const getBook = catchAsync(async (req, res, next) => {
     .populate({
       path: "reviews",
       select: "_id ratings review -book",
-      populate: {
-        path: "member",
-        select: "_id name photo",
-      },
     })
     .populate({
       path: "waitlist",

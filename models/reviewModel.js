@@ -35,7 +35,7 @@ reviewSchema.pre(/^find/, function (next) {
     select: "_id coverImg title",
   }).populate({
     path: "member",
-    select: "_id name",
+    select: "_id name photo",
   });
 
   next();
