@@ -90,7 +90,7 @@ export const updateReview = catchAsync(async (req, res, next) => {
   }
 
   // 2) Check if user is authorized to update review
-  if (review.member.toString() !== req.user._id.toString()) {
+  if (review.member?._id.toString() !== req.user?._id.toString()) {
     return next(
       new AppError("You are not authorized to update this review", 401)
     );
