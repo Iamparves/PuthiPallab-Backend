@@ -57,7 +57,7 @@ export const getBook = catchAsync(async (req, res, next) => {
       select: "_id ratings review -book",
       populate: {
         path: "member",
-        select: "_id name",
+        select: "_id name photo",
       },
     })
     .populate({
