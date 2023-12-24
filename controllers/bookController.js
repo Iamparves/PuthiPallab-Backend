@@ -54,7 +54,7 @@ export const getBook = catchAsync(async (req, res, next) => {
     })
     .populate({
       path: "reviews",
-      select: "_id ratings review -book",
+      select: "_id ratings review createdAt -book",
     })
     .populate({
       path: "waitlist",
