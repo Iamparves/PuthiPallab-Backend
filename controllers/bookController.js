@@ -9,8 +9,6 @@ import filterObj from "../utils/filterObj.js";
 import { notifyUserIfAvailable } from "./waitlistController.js";
 
 export const getAllBooks = catchAsync(async (req, res, next) => {
-  const totalBooks = await Book.countDocuments();
-
   const { search } = req.query;
   let searchQuery = {};
 
@@ -22,6 +20,12 @@ export const getAllBooks = catchAsync(async (req, res, next) => {
       ],
     };
   }
+
+  const totalFeatures = new APIFeatures(Book.find(searchQuery), req.query)
+    .filter()
+    .genreFilter();
+
+  const totalBooks = await totalFeatures.query.countDocuments();
 
   const features = new APIFeatures(Book.find(searchQuery), req.query)
     .filter()
