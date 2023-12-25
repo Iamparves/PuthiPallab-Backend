@@ -39,7 +39,7 @@ export const getAllBooks = catchAsync(async (req, res, next) => {
   if (!req.query.fields || req.query.fields.includes("genres")) {
     features.query = features.query.populate({
       path: "genres",
-      select: "_id genreName imageUrl",
+      select: "_id genreName imageUrl slug",
     });
   }
 

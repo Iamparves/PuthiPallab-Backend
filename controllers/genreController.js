@@ -23,8 +23,9 @@ export const getAllGenres = catchAsync(async (req, res, next) => {
 });
 
 export const addGenre = catchAsync(async (req, res, next) => {
-  const { genreName, imageUrl } = req.body;
-  const genre = await Genre.create({ genreName, imageUrl });
+  const { genreName, imageUrl, slug } = req.body;
+
+  const genre = await Genre.create({ genreName, imageUrl, slug });
 
   res.status(201).json({
     status: "success",
@@ -36,11 +37,11 @@ export const addGenre = catchAsync(async (req, res, next) => {
 
 export const updateGenre = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  const { genreName, imageUrl } = req.body;
+  const { genreName, imageUrl, slug } = req.body;
 
   const genre = await Genre.findByIdAndUpdate(
     id,
-    { genreName, imageUrl },
+    { genreName, imageUrl, slug },
     { new: true },
     { runValidators: true }
   );

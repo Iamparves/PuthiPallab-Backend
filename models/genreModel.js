@@ -8,6 +8,12 @@ const genreSchema = new mongoose.Schema(
       trim: true,
       unique: true,
     },
+    slug: {
+      type: String,
+      required: [true, "Genre slug is required"],
+      trim: true,
+      unique: true,
+    },
     imageUrl: {
       type: String,
       required: [true, "Genre image is required"],

@@ -82,10 +82,6 @@ bookSchema.virtual("waitlist", {
   foreignField: "book",
 });
 
-// bookSchema.virtual("ratingsAverage").get(function () {
-//   return this.reviews.reduce((acc, review) => acc + review.rating, 0) / this.reviews.length;
-// });
-
 const Book = mongoose.model("Book", bookSchema);
 
 export default Book;
