@@ -2,6 +2,7 @@ import { Router } from "express";
 import { protect, restrictTo } from "../controllers/authController.js";
 import {
   addBook,
+  addMultipleBooks,
   deleteBook,
   getAllBooks,
   getBook,
@@ -9,6 +10,10 @@ import {
 } from "../controllers/bookController.js";
 
 const router = Router();
+
+router
+  .route("/multiple")
+  .post(protect, restrictTo("librarian"), addMultipleBooks);
 
 router
   .route("/")

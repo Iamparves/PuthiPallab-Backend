@@ -69,6 +69,43 @@ export const getBook = catchAsync(async (req, res, next) => {
   });
 });
 
+export const addMultipleBooks = catchAsync(async (req, res, next) => {
+  const sequence = await Counter.findOne({});
+
+  const books = req.body.map((book, index) => {
+    const filteredData = filterObj(
+      book,
+      "coverImg",
+      "title",
+      "author",
+      "publisher",
+      "genres",
+      "publicationDate",
+      "bookLanguage",
+      "pageCount",
+      "summary",
+      "totalCopies"
+    );
+
+    filteredData.availableCopies = filteredData.totalCopies;
+    filteredData.bookId = sequence.bookSequence + index;
+
+    return filteredData;
+  });
+
+  const insertedBooks = await Book.insertMany(books);
+
+  sequence.bookSequence += books.length;
+  await sequence.save();
+
+  res.status(201).json({
+    status: "success",
+    data: {
+      books: insertedBooks,
+    },
+  });
+});
+
 export const addBook = catchAsync(async (req, res, next) => {
   const sequence = await Counter.findOne({});
 
