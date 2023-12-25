@@ -23,13 +23,15 @@ export const getAllBooks = catchAsync(async (req, res, next) => {
 
   const totalFeatures = new APIFeatures(Book.find(searchQuery), req.query)
     .filter()
-    .genreFilter();
+    .genreFilter()
+    .languageFilter();
 
   const totalBooks = await totalFeatures.query.countDocuments();
 
   const features = new APIFeatures(Book.find(searchQuery), req.query)
     .filter()
     .genreFilter()
+    .languageFilter()
     .sort()
     .limitFields()
     .paginate();

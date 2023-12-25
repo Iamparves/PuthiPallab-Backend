@@ -13,6 +13,7 @@ class APIFeatures {
       "fields",
       "search",
       "genres",
+      "bookLanguage",
     ];
     excludedFields.forEach((el) => delete queryObj[el]);
 
@@ -28,6 +29,15 @@ class APIFeatures {
     if (this.queryString.genres) {
       const genreIdArray = this.queryString.genres.split(",");
       this.query = this.query.where("genres").in(genreIdArray);
+    }
+
+    return this;
+  }
+
+  languageFilter() {
+    if (this.queryString.bookLanguage) {
+      const languageArray = this.queryString.bookLanguage.split(",");
+      this.query = this.query.where("bookLanguage").in(languageArray);
     }
 
     return this;
