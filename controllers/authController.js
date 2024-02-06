@@ -15,7 +15,6 @@ const signToken = (id) => {
 
 const cookieOptions = {
   httpOnly: true,
-  domain: "puthipallab-api.vercel.app",
   path: "/",
   secure: true,
   sameSite: "None",
@@ -122,10 +121,7 @@ export const login = catchAsync(async (req, res, next) => {
 });
 
 export const logout = catchAsync(async (req, res, next) => {
-  res.clearCookie("jwt", {
-    domain: ".puthipallab-api.vercel.app",
-    path: "/",
-  });
+  res.clearCookie("jwt");
 
   res.status(200).json({
     status: "success",
