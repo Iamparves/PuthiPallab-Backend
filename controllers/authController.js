@@ -15,7 +15,7 @@ const signToken = (id) => {
 
 const cookieOptions = {
   httpOnly: true,
-  domain: "puthipallab.vercel.app",
+  domain: "puthipallab-api.vercel.app",
   path: "/",
   secure: true,
   sameSite: "None",
