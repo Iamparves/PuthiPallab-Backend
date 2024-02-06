@@ -24,7 +24,7 @@ router.get("/me", protect, getMe);
 
 router.post("/signup", signup);
 router.post("/login", login);
-router.get("/logout", logout);
+router.post("/logout", logout);
 
 router.patch("/verifyEmail/:token", verifyEmail);
 router.post("/resendVerificationEmail", resendVerificationEmail);
