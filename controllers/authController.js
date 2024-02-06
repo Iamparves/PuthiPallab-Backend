@@ -121,7 +121,7 @@ export const login = catchAsync(async (req, res, next) => {
 });
 
 export const logout = catchAsync(async (req, res, next) => {
-  res.clearCookie("jwt", cookieOptions);
+  res.cookie("jwt", null, cookieOptions);
 
   res.status(200).json({
     status: "success",
