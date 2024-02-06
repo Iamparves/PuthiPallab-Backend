@@ -123,7 +123,7 @@ export const login = catchAsync(async (req, res, next) => {
 
 export const logout = catchAsync(async (req, res, next) => {
   res.clearCookie("jwt", {
-    domain: "puthipallab.vercel.app",
+    domain: "puthipallab-api.vercel.app",
     path: "/",
   });
 
